@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
+    #chat-container { width: 60%; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+    #chat-box { height: 400px; overflow-y: scroll; margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; background: #f0f0f0; }
+    .message { margin-bottom: 15px; }
+    .message.user { text-align: right; }
+    .message.ai { text-align: left; }
+    .message span { display: inline-block; padding: 8px 12px; border-radius: 20px; }
+    .message.user span { background: #007bff; color: white; }
+    .message.ai span { background: #ddd; }
+    #message-input { width: 80%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+    #send-btn { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat-box"></div>
+    <input type="text" id="message-input" placeholder="Type your message here...">
+    <button id="send-btn">Send</button>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById('chat-box');
+    const messageInput = document.getElementById('message-input');
+    const sendBtn = document.getElementById('send-btn');
+    let chatHistory = [];
+
+    const appendMessage = (role, content) => {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${role}`;
+      messageDiv.innerHTML = `<span>${content}</span>`;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    };
+
+    sendBtn.addEventListener('click', async () => {
+      const message = messageInput.value.trim();
+      if (!message) return;
+
+      // Add user message to chat
+      appendMessage('user', message);
+      chatHistory.push({ role: 'human', content: message });
+      messageInput.value = '';
+
+      try {
+        // Send the message to the backend
+        console.log( JSON.stringify({ history: chatHistory, message }));
+        const response = await fetch('http://127.0.0.1:8000/chat', {
+          method: 'POST',
+          headers: { 
+           'Content-Type': 'application/json; charset=UTF-8'
+          
+          },
+          
+          body: JSON.stringify({ history: chatHistory, message })
+        });
+
+        const data = await response.json();
+        const reply = data.reply;
+
+        // Add AI message to chat and update history
+        appendMessage('ai', reply.content);
+        chatHistory = data.updated_history;
+      } catch (err) {
+        appendMessage('ai', 'Error: Unable to fetch response.');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+{
+  "vendors": {
+    "Ahmed Khaled": {
+      "id": "12345",
+      "status": "Active",
+      "products": 3,
+      "dept": 500.0,
+      "business_type": "Supplier",
+      "contact": {
+        "phone": "+20123456789",
+        "email": "ahmed.khaled@supplier.com"
+      },
+      "contract_status": "Ongoing",
+      "payment_history": [
+        { "date": "2023-01-15", "amount": 200.0, "status": "Paid" },
+        { "date": "2023-03-12", "amount": 300.0, "status": "Paid" }
+      ],
+      "rating": 4.5
+    },
+    "Ali Ahmed": {
+      "id": "67890",
+      "status": "Active",
+      "products": 1,
+      "dept": 0.0,
+      "business_type": "Service Provider",
+      "contact": {
+        "phone": "+20123456780",
+        "email": "ali.ahmed@serviceprovider.com"
+      },
+      "contract_status": "Pending",
+      "payment_history": [
+        { "date": "2023-05-01", "amount": 500.0, "status": "Unpaid" }
+      ],
+      "rating": 3.7
+    },
+    "Saeed Omar": {
+      "id": "54321",
+      "status": "Not Active",
+      "products": 5,
+      "dept": 1000.0,
+      "business_type": "Manufacturer",
+      "contact": {
+        "phone": "+20234567890",
+        "email": "saeed.omar@manufacturer.com"
+      },
+      "contract_status": "Terminated",
+      "payment_history": [
+        { "date": "2022-08-25", "amount": 1000.0, "status": "Paid" }
+      ],
+      "rating": 2.8
+    },
+    "خالد": {
+      "id": "54322",
+      "status": "Not Active",
+      "products": 2,
+      "dept": 200.0,
+      "business_type": "Wholesaler",
+      "contact": {
+        "phone": "+20123456790",
+        "email": "khaled@wholesaler.com"
+      },
+      "contract_status": "Expired",
+      "payment_history": [
+        { "date": "2022-12-10", "amount": 100.0, "status": "Paid" }
+      ],
+      "rating": 3.9
+    },
+    "عمر": {
+      "id": "54323",
+      "status": "Not Active",
+      "products": 5,
+      "dept": 1000.0,
+      "business_type": "Distributor",
+      "contact": {
+        "phone": "+20123456791",
+        "email": "omar@distributor.com"
+      },
+      "contract_status": "Suspended",
+      "payment_history": [
+        { "date": "2022-09-30", "amount": 800.0, "status": "Unpaid" }
+      ],
+      "rating": 3.2
+    }
+  }
+}
